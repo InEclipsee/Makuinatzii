@@ -1,0 +1,15 @@
+body.login-body{
+    background-color: #dcdcdc;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+#formulario
+{
+    margin-top: 50px;
+}

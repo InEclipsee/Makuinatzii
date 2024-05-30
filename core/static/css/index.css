@@ -1,0 +1,63 @@
+body.index-body {
+    background-color: rgb(245, 245, 245);
+}
+
+#caja1 {
+    background-color: #f2f2f2; /* Color de fondo */
+    padding: 20px; 
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+#caja1 h1 {
+    color: #333; /* Color del texto del encabezado */
+    font-size: 24px; 
+}
+
+#caja1 p {
+    color: #666; /* Color del texto del párrafo */
+    font-size: 16px; 
+}
+
+#miSeccion {
+    padding: 20px; 
+}
+
+/* Estilos para el contenedor de las tarjetas dentro de la sección con id "miSeccion" */
+#miSeccion .card-group {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+
+
+
+/* Estilos para el contenedor de las tarjetas dentro de la sección con la clase "tarjetas-section" */
+.tarjetas-section .row {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+#mapa-seccion {
+    padding: 50px 0; /* Espaciado interior de la sección */
+    background-color: #dcdcdc; 
+}
+
+#map {
+    width: 90%;
+    max-width: 1200px;
+    height: 500px;
+    margin: 0 auto;
+   
+}
+
+
+footer {
+    background-color: darkslategray;
+    height: 5vh;
+    color: white;
+    padding: 5px;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
