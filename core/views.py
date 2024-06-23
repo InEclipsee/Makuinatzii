@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from core.models import publicacion
+from core.models import Publicacion
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
