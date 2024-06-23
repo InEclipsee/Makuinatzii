@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from core.models import publicacion
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -10,11 +14,9 @@ def contacto(request):
 def galeria(request):
     return render(request, 'core/galeria.html')
 
-def login(request):
-    return render(request, 'core/login.html')
-
 def registro(request):
     return render(request, 'core/registro.html')
 
-def perfil(request):
-    return render(request, 'core/perfil.html')
+@login_required(login_url="/accounts/login/")
+def profile(request):
+    return render(request, 'core/profile.html')
