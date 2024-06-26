@@ -30,7 +30,11 @@ body.index-body {
 }
 
 
-
+.carousel-item > img
+{
+    height: 532px;
+    width: 1280px;
+}
 
 /* Estilos para el contenedor de las tarjetas dentro de la sección con la clase "tarjetas-section" */
 .tarjetas-section .row {
