@@ -55,22 +55,85 @@
 
 <!-- Cards -->
 <div class="col-10" id="imageHolder">
-  <button type="button" class="btn btn-danger float-end"  >Eliminar</button>
-  <button type="button" class="btn btn-warning float-end" >Editar</button>
-  <button type="button" class="btn btn-success float-end" data-bs-target="#mecaPublicar" data-bs-toggle="modal">Agregar</button>
+  {% for group in groups %}
+    {% if group.name == "Mecanico"  %}  
+ <a type="button" class="btn btn-success float-end" href="{% url 'add_url' %}">Agregar</a>
+    {% endif %}
+    {% if group.name == "Manager"  %}  
+ <a type="button" class="btn btn-success float-end" href="{% url 'add_url' %}">Agregar</a>
+    {% endif %}
+ {% endfor %}
   <div class="row row-cols-1 row-cols-md-5 g-4 align-items-stretch">
       {% if dataPosts %}
           {% for post in dataPosts %}
-            <div class="col">
-              <div class="card mecanico{{ post.idMecanico }}" id="{{post.id}}"> 
-                <img src="../{{post.imagen|cut:'core/'}}" class="card-img-top" alt="..." width="1280px" height="128px">
-                <div class="card-body">
-                    <a href="" class="stretched-link" data-bs-target="#modalPub{{post.id}}" data-bs-toggle="modal"></a>
-                    <h5 class="card-title">{{post.titulo}} </h5>
-                    <p class="card-text">{{post.idMecanico}}  <br> <b>{{post.fecha}}</b></p>
+            {% if post.estado != "P" and post.estado != "R" %}
+              <div class="col">
+                <div class="card mecanico{{ post.idMecanico }}" id="{{post.id}}"> 
+                  <img src="../{{post.imagen|cut:'core/'}}" class="card-img-top" alt="..." width="1280px" height="128px">
+                  <div class="card-body">
+                      <a href="" class="stretched-link" data-bs-target="#modalPub{{post.id}}" data-bs-toggle="modal"></a>
+                      <h5 class="card-title">{{post.titulo}} </h5>
+                      <p class="card-text">{{post.idMecanico}}  <br> <b>{{post.fecha}}</b> </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            {% else %}
+              {% for group in groups %}
+                {% if group.name == "Mecanico"  %}
+                  {% if post.estado == "P" %}
+                    <div class="col">
+                      <div class="card pendiente bg-secondary text-white mecanico{{ post.idMecanico }}" id="{{post.id}}"> 
+                        <img src="../{{post.imagen|cut:'core/'}}" class="card-img-top" alt="..." width="1280px" height="128px">
+                        <div class="card-body">
+                            <a href="" class="stretched-link" data-bs-target="#modalPub{{post.id}}" data-bs-toggle="modal"></a>
+                            <h5 class="card-title">{{post.titulo}} </h5>
+                            <p class="card-text">{{post.idMecanico}}  <br> <b>{{post.fecha}}</b> </p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% if post.estado == "R" %} 
+                    <div class="col">
+                      <div class="card pendiente bg-danger text-white mecanico{{ post.idMecanico }}" id="{{post.id}}"> 
+                        <img src="../{{post.imagen|cut:'core/'}}" class="card-img-top" alt="..." width="1280px" height="128px">
+                        <div class="card-body">
+                            <a href="" class="stretched-link" data-bs-target="#modalPub{{post.id}}" data-bs-toggle="modal"></a>
+                            <h5 class="card-title">{{post.titulo}} </h5>
+                            <p class="card-text">{{post.idMecanico}}  <br> <b>{{post.fecha}}</b> </p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endif %}
+                {% if group.name == "Manager" %}
+                  {% if post.estado == "P" %}
+                    <div class="col">
+                      <div class="card pendiente bg-secondary text-white mecanico{{ post.idMecanico }}" id="{{post.id}}"> 
+                        <img src="../{{post.imagen|cut:'core/'}}" class="card-img-top" alt="..." width="1280px" height="128px">
+                        <div class="card-body">
+                            <a href="" class="stretched-link" data-bs-target="#modalPub{{post.id}}" data-bs-toggle="modal"></a>
+                            <h5 class="card-title">{{post.titulo}} </h5>
+                            <p class="card-text">{{post.idMecanico}}  <br> <b>{{post.fecha}}</b> </p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% if post.estado == "R" %} 
+                    <div class="col">
+                      <div class="card pendiente bg-danger text-white mecanico{{ post.idMecanico }}" id="{{post.id}}"> 
+                        <img src="../{{post.imagen|cut:'core/'}}" class="card-img-top" alt="..." width="1280px" height="128px">
+                        <div class="card-body">
+                            <a href="" class="stretched-link" data-bs-target="#modalPub{{post.id}}" data-bs-toggle="modal"></a>
+                            <h5 class="card-title">{{post.titulo}} </h5>
+                            <p class="card-text">{{post.idMecanico}}  <br> <b>{{post.fecha}}</b> </p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% endif %}
+              {% endfor %}
+
+            {% endif %}
           {% endfor %}
       {% else %}
           <h1>No hay publicaciones disponibles...</h1>
@@ -79,46 +142,6 @@
   </div>
 
   <!-- MODAL-->
-  <div class="modal fade" id="mecaPublicar" aria-hidden="true" aria-labelledby="mecaPublicar" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modalPub1Label">Crear publicación</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <a href="#"><img style="margin-bottom: 10px;" src="img/imagePlaceHolder.jpg" alt=""></a>
-          <div class="mb-3">
-            <label for="inputNombre" class="form-label">Nombre publicación</label>
-            <input type="text" class="form-control" id="inputNombre">
-          </div>
-          <div class="mb-3">
-            <label for="inputDetalles" class="form-label">Detalles</label>
-            <input type="text" class="form-control" id="inputDetalles">
-          </div>
-          <div class="mb-3">
-            <label for="inputFecha" class="form-label">Fecha</label>
-            <input type="text" class="form-control" id="inputFecha">
-          </div>
-          <div class="form-group">
-            <label for="inputServicio">Servicio</label>
-            <select class="form-control" id="inputServicio">
-                <option value="" disabled selected>Selecciona un servicio</option>
-                <option value="Servicio Técnico">Servicio Técnico</option>
-                <option value="Desabolladura y Pintura">Desabolladura y Pintura</option>
-                <option value="Repuestos">Repuestos</option>
-                <option value="Detallado">Detallado</option>
-            </select>
-          </div>
-          <br>
-          <button type="submit" class="btn btn-primary">Crear publicación</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
   {% for post in dataPosts %}
     <div class="modal fade" id="modalPub{{post.id}}" aria-hidden="true" aria-labelledby="modalPub{{post.id}}Label" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
@@ -136,9 +159,19 @@
             <p>{{post.descripcion}} <br>
               <b>Trabajo realizado:</b> {{post.trabajo.titulo}} <br>
               <b>Mecanico:</b> {{post.idMecanico}}</p>
-              
+              <b>Estado: {{post.get_estado_display}}</b>
+              {% for group in groups %}
+                {% if group.name == "Mecanico"  %}  
+              <a type="button" class="btn btn-danger float-end" href="{% url 'delete_url' post.id %}">Eliminar</a>
+              <a type="button" class="btn btn-warning float-end" href="{% url 'update_url' post.id %}">Editar</a>
+                {% endif %}
+                {% if group.name == "Manager"  %}  
+                <a type="button" class="btn btn-danger float-end" href="{% url 'delete_url' post.id %}">Eliminar</a>
+                <a type="button" class="btn btn-warning float-end" href="{% url 'update_url' post.id %}">Editar</a>
+                {% endif %}
+              {% endfor %}
           </div>
-
+          
         </div>
       </div>
     </div>

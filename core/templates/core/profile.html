@@ -25,15 +25,13 @@
                 </svg>
                 <h2>{{ user.first_name }} {{ user.last_name }}</h2>
                 <p>Correo Electrónico: {{ user.email }}</p>
-                <p>Dirección: Calle 123, Ciudad, País</p>
-                <p>Servicios Solicitados: 10</p>
+                <ul>
+                    
+                    </ul>
+                <p>Permisos: {% for group in groups %}
+                    {{ group.name }}
+            {% endfor %}</p>
             </div>
-        </section>
-
-        <section class="caja-color">
-            <h2>Historial de Servicios Solicitados</h2>
-            <!-- Aquí puedes agregar el contenido relacionado con el historial de trabajos -->
-        </section>
         
     {% else %}
     <p>Por favor, inicia sesión para ver esta página.</p>

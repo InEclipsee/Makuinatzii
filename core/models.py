@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Servicio(models.Model):
     id = models.IntegerField(primary_key=True)
     titulo = models.CharField(max_length=30)
-    descripcion = models.CharField(max_length=128, null=True, blank=True, default=1)
+    descripcion = models.CharField(max_length=128, null=True, blank=True)
     imagen = models.ImageField(upload_to="core/static/img/serviciosImg")
     precio = models.IntegerField(default=999999)
     fechaSolicitado = models.DateField(null=True, blank=True)
@@ -15,7 +15,7 @@ class Servicio(models.Model):
 class Publicacion(models.Model):
     id = models.IntegerField(primary_key=True)
     titulo = models.CharField(max_length=30)
-    descripcion = models.CharField(max_length=128, null=True, blank=True, default=1)
+    descripcion = models.CharField(max_length=128, null=True, blank=True)
     imagen = models.ImageField(upload_to='core/static/img/postsImg')
     trabajo = models.ForeignKey(Servicio, related_name="servicioRealizado", on_delete=models.CASCADE, blank=True, null=True)
     idMecanico = models.ForeignKey(User, related_name="mecanicoActivo", on_delete=models.CASCADE, blank=True, null=True)
@@ -24,7 +24,7 @@ class Publicacion(models.Model):
         ('P', 'Pendiente'),
         ('A', 'Aprobado'),)
     estado = models.CharField(max_length=10, choices=ESTADO_DROP, default='P')
-    razonRechazo = models.CharField(max_length=256, null=True, blank=True, default=1)
+    razonRechazo = models.CharField(max_length=256, null=True, blank=True)
     fecha = models.DateField()
     def __str__(self) -> str:
         return super().__str__()
