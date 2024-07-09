@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Servicio(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=128, null=True, blank=True)
     imagen = models.ImageField(upload_to="core/static/img/serviciosImg")
@@ -13,7 +14,7 @@ class Servicio(models.Model):
         return super().__str__()
 
 class Publicacion(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=128, null=True, blank=True)
     imagen = models.ImageField(upload_to='core/static/img/postsImg')
@@ -29,5 +30,4 @@ class Publicacion(models.Model):
     def __str__(self) -> str:
         return super().__str__()
     
-    
-    
+

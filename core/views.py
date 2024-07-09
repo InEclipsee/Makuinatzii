@@ -36,8 +36,11 @@ def formularioPublicacion(request):
     if request.method == 'POST':
         form = FormPublicacion(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.save(user=request.user)
             return redirect('galeria')
+    else:
+        form = FormPublicacion(request.POST, request.FILES)
     context = {'form': form}
     return render(request, 'core/add.html', context)
 
